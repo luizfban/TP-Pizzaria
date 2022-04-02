@@ -19,7 +19,7 @@
 
 # Rotas
 
-## Customer
+### Customer
 **POST** `/signup` 
 ```js
 {
