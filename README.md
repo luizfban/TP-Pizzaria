@@ -16,3 +16,14 @@
 2. Colocar as credenciais que está no .env
 
 ![db credentials](https://cdn.discordapp.com/attachments/765635174012551208/959619257459683359/unknown.png)
+
+## Rotas
+
+### Customer
+**POST** `/signup` 
+```js
+{
+  "email": String,
+  "name": String
+}
+```
