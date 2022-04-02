@@ -4,8 +4,8 @@
 
 # Inicializar projeto
 ```sh
-  docker-compose up -d
   cp .env_sample .env # Copiar .env_sample para .env
+  docker-compose up -d
   yarn
   yarn sequelize db:migrate
   yarn dev
