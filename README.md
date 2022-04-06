@@ -20,10 +20,28 @@
 # Rotas
 
 ### Customer
-**POST** `/signup` 
+- **GET** `/customer/:id` 
+- **POST** `/signup` 
 ```js
 {
   "email": String,
   "name": String
 }
 ```
+
+### Employee
+- **GET** `/employee/:id` 
+- **POST** `/add-employee` 
+```js
+{
+  "email": String,
+  "name": String,
+  "password:" String,
+  "admin": <Optional> Boolean
+}
+```
+
+
+
+
+
