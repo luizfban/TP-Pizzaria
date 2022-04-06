@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('customers', {
+    await queryInterface.createTable('employees', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -18,6 +18,15 @@ module.exports = {
         allowNull: false,
       },
 
+      admin: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+
+      password_hash: {
+        type: Sequelize.STRING,
+      },
+
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -31,6 +40,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('customers');
+    await queryInterface.dropTable('employees');
   },
 };
