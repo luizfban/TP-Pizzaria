@@ -43,7 +43,7 @@ const Register = ({ userType, setUserType, form, onSubmit, isLoading }) => (
               />
             </Form.Item>
 
-            <Form.Item label="Administrador">
+            <Form.Item label="Administrador" name="admin">
               <Switch
                 onChange={(isChecked) =>
                   form.setFieldsValue({ admin: isChecked })
