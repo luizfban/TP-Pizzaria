@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Form, notification } from "antd";
-import { useMutation } from "react-query";
 
 import api from "../services/api";
 import { Register as RegisterComponent } from "../components";
@@ -11,13 +10,10 @@ const Register = () => {
 
   const url = userType === "customer" ? "/signup" : "add-employee";
 
-  const { isLoading, mutate: postUser } = useMutation(async () => {
-    return await api.post(url, form.getFieldsValue());
-  });
-
   const onSubmit = async () => {
     try {
-      postUser();
+      await api.post(url, form.getFieldsValue());
+
       notification.success({
         message: "Sucesso ao cadastrar usuário!",
         description:
@@ -38,7 +34,7 @@ const Register = () => {
         setUserType,
         form,
         onSubmit,
-        isLoading,
+        isLoading: false,
       }}
     />
   );
