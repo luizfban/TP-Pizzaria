@@ -64,7 +64,7 @@
 - **POST** `/order` @session
 ```js
 {
-  "customerEmail": <Optional> String
+  "customerEmail": <Optional> String,
 	"products": [
 		{ "id": Integer, "quantity": Integer }
 	]
