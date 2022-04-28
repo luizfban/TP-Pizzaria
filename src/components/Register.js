@@ -1,13 +1,22 @@
-import { Card, Form, Input, Button, Typography, Radio, Switch } from "antd";
+import {
+  Card,
+  Form,
+  Input,
+  Button,
+  Typography,
+  Radio,
+  Switch,
+  Space,
+} from "antd";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import FormLayout from "./FormLayout";
+
 const Register = ({ userType, setUserType, form, onSubmit, isLoading }) => (
-  <Wrapper>
-    <Logo>
-      Pizza<b>.</b>
-    </Logo>
+  <FormLayout>
     <RegisterCard>
-      <Typography.Title>Cadastre o usuário aqui!</Typography.Title>
+      <Typography.Title>Cadastre aqui!</Typography.Title>
       <Typography.Title level={2}>
         Qual tipo de usuário deseja cadastrar?
       </Typography.Title>
@@ -52,7 +61,11 @@ const Register = ({ userType, setUserType, form, onSubmit, isLoading }) => (
             </Form.Item>
           </>
         )}
-
+        <Space style={{ margin: "12px 0 20px" }}>
+          <Typography.Text>
+            Já possui uma conta? <Link to="/login">Faça login aqui</Link>
+          </Typography.Text>
+        </Space>
         <Form.Item>
           <Button type="primary" htmlType="submit" loading={isLoading}>
             Cadastrar
@@ -60,33 +73,8 @@ const Register = ({ userType, setUserType, form, onSubmit, isLoading }) => (
         </Form.Item>
       </Form>
     </RegisterCard>
-  </Wrapper>
+  </FormLayout>
 );
-
-const Wrapper = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  height: 100%;
-  overflow-x: hidden;
-  padding: 64px 0 32px;
-
-  &:before {
-    content: "";
-    position: absolute;
-    background: #ea1d2c;
-    border-radius: 100%;
-    top: -32vh;
-    left: -18vh;
-    width: 90vh;
-    height: 90vh;
-  }
-
-  @media (max-height: 744px) {
-    height: auto;
-  }
-`;
 
 const RegisterCard = styled(Card)`
   box-shadow: 0 1px 4px rgb(0 0 0 / 5%), 0 4px 16px rgb(0 0 0 / 6%);
@@ -162,20 +150,6 @@ const RegisterCard = styled(Card)`
   @media (max-width: 726px) {
     width: 100%;
     min-width: 300px;
-  }
-`;
-
-const Logo = styled.div`
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  color: #fff;
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 2px;
-
-  b {
-    color: #a3d1ae;
   }
 `;
 

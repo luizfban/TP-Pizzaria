@@ -1,16 +1,13 @@
-import { Card, Form, Input, Button, Typography, Switch } from "antd";
+import { Card, Form, Input, Button, Typography, Space } from "antd";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import FormLayout from "./FormLayout";
+
 const Login = ({ form, onSubmit, isLoading }) => (
-  <Wrapper>
-    <Logo>
-      Pizza<b>.</b>
-    </Logo>
-    <RegisterCard>
-      <Typography.Title>Realize seu Login!</Typography.Title>
-      <Typography.Title level={2}>
-        Digite o e-mail e a senha.
-      </Typography.Title>
+  <FormLayout>
+    <LoginCard>
+      <Typography.Title>Login de usuário!</Typography.Title>
       <Form layout="vertical" form={form} onFinish={onSubmit} size="large">
         <Form.Item label="E-mail" name="email" rules={[{ type: "email" }]}>
           <Input
@@ -18,52 +15,33 @@ const Login = ({ form, onSubmit, isLoading }) => (
           />
         </Form.Item>
 
-          <>
-            <Form.Item label="Senha" name="password">
-              <Input.Password
-                onChange={(e) =>
-                  form.setFieldsValue({ password: e.target.value })
-                }
-              />
-            </Form.Item>
-          </>
-
+        <Form.Item label="Senha" name="password">
+          <Input.Password
+            onChange={(e) => form.setFieldsValue({ password: e.target.value })}
+          />
+        </Form.Item>
+        <Space style={{ margin: "12px 0 20px" }}>
+          <Typography.Text>
+            Ainda não tem uma conta?{" "}
+            <Link to="/register">Cadastre-se aqui</Link>
+          </Typography.Text>
+        </Space>
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={isLoading}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ width: "100%" }}
+            loading={isLoading}
+          >
             Entrar
           </Button>
         </Form.Item>
       </Form>
-    </RegisterCard>
-  </Wrapper>
+    </LoginCard>
+  </FormLayout>
 );
 
-const Wrapper = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  height: 100%;
-  overflow-x: hidden;
-  padding: 64px 0 32px;
-
-  &:before {
-    content: "";
-    position: absolute;
-    background: #ea1d2c;
-    border-radius: 100%;
-    top: -32vh;
-    left: -18vh;
-    width: 90vh;
-    height: 90vh;
-  }
-
-  @media (max-height: 744px) {
-    height: auto;
-  }
-`;
-
-const RegisterCard = styled(Card)`
+const LoginCard = styled(Card)`
   box-shadow: 0 1px 4px rgb(0 0 0 / 5%), 0 4px 16px rgb(0 0 0 / 6%);
   border-radius: 8px;
   border: none;
@@ -137,20 +115,6 @@ const RegisterCard = styled(Card)`
   @media (max-width: 726px) {
     width: 100%;
     min-width: 300px;
-  }
-`;
-
-const Logo = styled.div`
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  color: #fff;
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 2px;
-
-  b {
-    color: #a3d1ae;
   }
 `;
 

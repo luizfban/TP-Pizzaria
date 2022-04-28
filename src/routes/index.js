@@ -1,8 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
-import { Register } from "../pages";
-import { Login } from "../pages";
+import { Register, Login } from "../pages";
 import PrivateRoute from "./PrivateRoute";
 
 export default function CustomRoutes() {
@@ -11,7 +15,7 @@ export default function CustomRoutes() {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<div>teste</div>} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
         <Route path="/private" element={<PrivateRoute />}>
           {/* rotas privadas */}
         </Route>

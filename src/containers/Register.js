@@ -3,10 +3,12 @@ import { Form, notification } from "antd";
 
 import api from "../services/api";
 import { Register as RegisterComponent } from "../components";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [userType, setUserType] = useState("customer");
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const url = userType === "customer" ? "/signup" : "add-employee";
 
@@ -19,6 +21,8 @@ const Register = () => {
         description:
           "Agora você tem acesso a plataforma para realizar diversas ações de acordo com o tipo de usuário",
       });
+
+      navigate("/login");
     } catch {
       notification.error({
         message: "Erro ao cadastrar usuário!",
