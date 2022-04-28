@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { Customer, Employee, Auth, Product, Order } from './controllers';
-import { auth } from './middlewares';
+// import { auth } from './middlewares';
 
 const routes = new Router();
 
@@ -13,11 +13,11 @@ routes.get('/employee/:id', Employee.showId);
 
 routes.post('/login', Auth.store);
 
-routes.post('/product', auth(), Product.store);
+routes.post('/product', Product.store);
 routes.get('/product/:id', Product.showId);
 routes.get('/products', Product.showAll);
 
-routes.post('/order', auth(), Order.store);
+routes.post('/order', Order.store);
 routes.get('/order/:id', Order.showId);
 
 export default routes;
