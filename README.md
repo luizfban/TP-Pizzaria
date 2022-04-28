@@ -50,6 +50,7 @@
 
 ### Product
 - **GET** `/product/:id` 
+- **GET** `/products` 
 - **POST** `/product` @session
 ```js
 {
