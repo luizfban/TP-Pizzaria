@@ -10,13 +10,14 @@ const Login = () => {
 
   const onSubmit = async () => {
     try {
-      await api.post("/login", form.getFieldsValue());
+      const { data } = await api.post("/login", form.getFieldsValue());
+      sessionStorage.setItem("token", data.token);
 
       notification.success({
         message: "Login feito com sucesso!",
         description: "Use nossa plataforma!",
       });
-      navigate("/");
+      navigate("/dashboard");
     } catch {
       notification.error({
         message: "Erro ao fazer login!",

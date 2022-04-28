@@ -23,3 +23,8 @@ code {
 button:not(.ant-btn-loading)  .ant-btn-loading-icon {
   display: none;
 }
+
+.ant-page-header {
+  padding: 0;
+  margin-bottom: 32px;
+}
