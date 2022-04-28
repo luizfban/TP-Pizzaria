@@ -7,7 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import { Register, Login, Home, AddProducts } from "../pages";
+import { Register, Login, Home, AddProducts, AddOrders } from "../pages";
 import PrivateRoute from "./PrivateRoute";
 
 export default function CustomRoutes() {
@@ -27,7 +27,7 @@ export default function CustomRoutes() {
         >
           <Route index element={<Home />} />
           <Route path="products/new" element={<AddProducts />} />
-          <Route path="orders/new" element={<AddProducts />} />
+          <Route path="orders/new" element={<AddOrders />} />
         </Route>
       </Routes>
     </Router>

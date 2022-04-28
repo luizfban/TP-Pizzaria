@@ -26,17 +26,15 @@ const AddProducts = () => {
 
   const onSubmit = async () => {
     try {
-      await api.post("/products", form.getFieldsValue());
+      await api.post("/product", form.getFieldsValue());
 
       notification.success({
-        message: "Login feito com sucesso!",
-        description: "Use nossa plataforma!",
+        message: "Produto adicionado com sucesso!",
       });
       navigate("/");
     } catch {
       notification.error({
-        message: "Erro ao cadastrar produto!",
-        description: "Tente novamente...",
+        message: "Erro ao adicionar produto!",
       });
     }
   };
