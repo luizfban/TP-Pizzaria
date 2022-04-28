@@ -14,6 +14,7 @@ const AddProducts = ({
         mode="multiple"
         placeholder="Selecione os ingredientes"
         allowClear
+        filterOption={false}
         value={value}
         onChange={(e) => form.setFieldsValue({ ingredients: e.target.value })}
       >
