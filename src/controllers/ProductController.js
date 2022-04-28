@@ -19,6 +19,10 @@ class ProductController {
 
     return res.status(200).json(product);
   }
+
+  async showAll(req, res) {
+    return res.status(200).json(await Product.findAll());
+  }
 }
 
 export default new ProductController();

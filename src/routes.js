@@ -15,6 +15,7 @@ routes.post('/login', Auth.store);
 
 routes.post('/product', auth(), Product.store);
 routes.get('/product/:id', Product.showId);
+routes.get('/products', Product.showAll);
 
 routes.post('/order', auth(), Order.store);
 routes.get('/order/:id', Order.showId);
