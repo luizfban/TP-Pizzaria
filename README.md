@@ -40,8 +40,34 @@
   "admin": <Optional> Boolean
 }
 ```
+- **POST** `/login`
+```js
+{
+  "email": String,
+  "password:" String,
+}
+```
 
+### Product
+- **GET** `/product/:id` 
+- **POST** `/product` @session
+```js
+{
+	"name": String,
+	"ingredients": [String],
+	"price": Float
+}
+```
 
-
-
+### Order
+- **GET** `/order/:id` 
+- **POST** `/order` @session
+```js
+{
+  "customerEmail": <Optional> String
+	"products": [
+		{ "id": Integer, "quantity": Integer }
+	]
+}
+```
 
