@@ -17,7 +17,7 @@ const Login = () => {
         message: "Login feito com sucesso!",
         description: "Use nossa plataforma!",
       });
-      navigate("/dashboard");
+      navigate("/");
     } catch {
       notification.error({
         message: "Erro ao fazer login!",

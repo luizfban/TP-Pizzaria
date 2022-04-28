@@ -4,7 +4,7 @@ import { Home as HomeComponent } from "../components";
 
 const routes = [
   {
-    path: "index",
+    path: "/",
     breadcrumbName: "Home",
   },
 ];

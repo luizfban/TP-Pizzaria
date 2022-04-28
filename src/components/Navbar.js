@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Navbar = () => (
   <NavbarTag>
     <Flex>
-      <Link to="/dashboard">
+      <Link to="/">
         <Typography.Text className="logo">
           Pizza<b>.</b>
         </Typography.Text>

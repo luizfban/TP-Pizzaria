@@ -25,9 +25,9 @@ export default function CustomRoutes() {
             </Layout>
           }
         >
-          <Route path="/dashboard" element={<Home />} />
-          <Route path="/products/new" element={<AddProducts />} />
-          <Route path="/orders/new" element={<AddProducts />} />
+          <Route index element={<Home />} />
+          <Route path="products/new" element={<AddProducts />} />
+          <Route path="orders/new" element={<AddProducts />} />
         </Route>
       </Routes>
     </Router>
