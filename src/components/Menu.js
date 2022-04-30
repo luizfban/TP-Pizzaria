@@ -1,6 +1,13 @@
 import { Card, Col, Divider, Row, Spin, Typography } from "antd";
 import styled from "styled-components";
 
+const mapSize = {
+  0: "Pequena",
+  1: "Média",
+  2: "Grande",
+  3: "Família",
+};
+
 const Menu = ({ products, isLoading }) => (
   <>
     <CustomDivider />
@@ -13,7 +20,7 @@ const Menu = ({ products, isLoading }) => (
           <Spin tip="Carregando" />
         ) : (
           products.map((product) => (
-            <Col md={8} xs={24}>
+            <Col md={8} xs={24} key={product.id}>
               <Card>
                 <Typography.Title level={5}>{product.name}</Typography.Title>
                 <Typography.Text type="secondary">
@@ -21,54 +28,27 @@ const Menu = ({ products, isLoading }) => (
                 </Typography.Text>
                 <Divider />
                 <div>
-                  <Row
-                    justify="space-between"
-                    style={{
-                      width: "100%",
-                      alignItems: "center",
-                      marginBottom: "12px",
-                    }}
-                  >
-                    <Typography.Text strong>Pequena: </Typography.Text>
-                    <Pill>
-                      {product.price.toLocaleString("pt-br", {
-                        style: "currency",
-                        currency: "BRL",
-                      })}
-                    </Pill>
-                  </Row>
-                  <Row
-                    justify="space-between"
-                    style={{
-                      width: "100%",
-                      alignItems: "center",
-                      marginBottom: "12px",
-                    }}
-                  >
-                    <Typography.Text strong>Média: </Typography.Text>
-                    <Pill>
-                      {product.price.toLocaleString("pt-br", {
-                        style: "currency",
-                        currency: "BRL",
-                      })}
-                    </Pill>
-                  </Row>
-                  <Row
-                    justify="space-between"
-                    style={{
-                      width: "100%",
-                      alignItems: "center",
-                      marginBottom: "12px",
-                    }}
-                  >
-                    <Typography.Text strong>Grande: </Typography.Text>
-                    <Pill>
-                      {product.price.toLocaleString("pt-br", {
-                        style: "currency",
-                        currency: "BRL",
-                      })}
-                    </Pill>
-                  </Row>
+                  {product.prices.map((p, index) => (
+                    <Row
+                      key={index}
+                      justify="space-between"
+                      style={{
+                        width: "100%",
+                        alignItems: "center",
+                        marginBottom: "12px",
+                      }}
+                    >
+                      <Typography.Text strong>
+                        {mapSize[p.size]}:{" "}
+                      </Typography.Text>
+                      <Pill>
+                        {p.price.toLocaleString("pt-br", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </Pill>
+                    </Row>
+                  ))}
                 </div>
               </Card>
             </Col>

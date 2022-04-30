@@ -7,6 +7,9 @@ const menu = (
   <Menu
     items={[
       {
+        label: <Link to="/products">Ver produtos</Link>,
+      },
+      {
         label: <Link to="/orders">Ver pedidos</Link>,
       },
       {

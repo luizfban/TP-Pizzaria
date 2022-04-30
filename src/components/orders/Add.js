@@ -2,6 +2,8 @@ import { Button, Card, Form, Input, Select } from "antd";
 import styled from "styled-components";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
+const size = ["Pequena", "Média", "Grande", "Família"];
+
 const AddProducts = ({ form, onSubmit, products = [], isLoading }) => (
   <CardWrapper>
     <Form layout="vertical" form={form} onFinish={onSubmit} size="large">
@@ -35,7 +37,7 @@ const AddProducts = ({ form, onSubmit, products = [], isLoading }) => (
                   <Select
                     placeholder="Produtos"
                     loading={isLoading}
-                    style={{ width: "47%", marginRight: "16px" }}
+                    style={{ width: "29%", marginRight: "16px" }}
                   >
                     {products.map((product, index) => (
                       <Select.Option key={index} value={product.id}>
@@ -44,8 +46,20 @@ const AddProducts = ({ form, onSubmit, products = [], isLoading }) => (
                     ))}
                   </Select>
                 </Form.Item>
+                <Form.Item name={[index, "size"]} noStyle>
+                  <Select
+                    placeholder="Tamanho"
+                    style={{ width: "29%", marginRight: "16px" }}
+                  >
+                    {size.map((s, index) => (
+                      <Select.Option key={index} value={index}>
+                        {s}
+                      </Select.Option>
+                    ))}
+                  </Select>
+                </Form.Item>
                 <Form.Item name={[index, "quantity"]} noStyle>
-                  <Input placeholder="Quantidade" style={{ width: "47%" }} />
+                  <Input placeholder="Quantidade" style={{ width: "29%" }} />
                 </Form.Item>
                 {fields.length > 1 ? (
                   <MinusCircleOutlined

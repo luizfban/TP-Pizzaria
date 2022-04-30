@@ -1,4 +1,4 @@
-import { Button, List, PageHeader, Spin, Typography } from "antd";
+import { Button, List, notification, PageHeader, Spin, Typography } from "antd";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
@@ -17,9 +17,20 @@ const routes = [
   },
 ];
 
+const sizes = ["P", "M", "G", "F"];
+
 const getProducts = async () => {
   const { data } = await api.get("/products");
   return data;
+};
+
+const onDelete = async (id) => {
+  try {
+    await api.delete(`/product/${id}`);
+    window.location.reload();
+  } catch {
+    notification.error({ message: "Erro ao deletar!" });
+  }
 };
 
 const Products = () => {
@@ -60,7 +71,7 @@ const Products = () => {
           renderItem={(item) => (
             <List.Item
               actions={[
-                <Button type="primary" danger>
+                <Button type="primary" danger onClick={() => onDelete(item.id)}>
                   Deletar
                 </Button>,
               ]}
@@ -70,8 +81,16 @@ const Products = () => {
                 description={item.ingredients.join(", ")}
               />
               <div>
-                <b>Preço: </b>
-                {item.price}
+                <b>Preços: </b>
+                {item.prices
+                  .map(
+                    (p) =>
+                      `${sizes[p.size]} - ${p.price.toLocaleString("pt-br", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}`
+                  )
+                  .join(", ")}
               </div>
             </List.Item>
           )}

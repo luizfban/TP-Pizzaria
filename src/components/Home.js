@@ -1,30 +1,41 @@
-import { Button, Space } from "antd";
+import { Button, Row } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <Space>
+    <Row style={{ flexDirection: "column" }}>
       <Button
         ghost
         shape="round"
         type="primary"
         size="large"
-        onClick={() => navigate("/products/new")}
+        style={{ marginBottom: "16px" }}
+        onClick={() => navigate("/products")}
       >
-        Adicionar produto
+        Ver produtos
       </Button>
       <Button
         ghost
         shape="round"
         type="primary"
         size="large"
-        onClick={() => navigate("/orders/new")}
+        style={{ marginBottom: "16px" }}
+        onClick={() => navigate("/orders")}
       >
-        Novo pedido
+        Ver pedidos
       </Button>
-    </Space>
+      <Button
+        ghost
+        shape="round"
+        type="primary"
+        size="large"
+        onClick={() => navigate("/menu")}
+      >
+        Ver Menu
+      </Button>
+    </Row>
   );
 };
 
