@@ -132,7 +132,7 @@ class OrderController {
     }
 
     order.status = STATUS[status];
-    order.update();
+    order.update({ status: order.status });
     return res.status(200).json(order);
   }
 }
