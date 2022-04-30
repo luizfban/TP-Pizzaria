@@ -14,9 +14,9 @@ module.exports = {
         allowNull: false,
       },
 
-      product_id: {
+      product_prices_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'products', key: 'id' },
+        references: { model: 'product_prices', key: 'id' },
         allowNull: false,
       },
 

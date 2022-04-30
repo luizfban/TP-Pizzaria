@@ -1,6 +1,19 @@
 import { Op } from 'sequelize';
-import { Order, Product, OrderProducts, Customer } from '../models';
-import { validateOrder } from './validators/order';
+import {
+  Order,
+  Product,
+  OrderProducts,
+  Customer,
+  ProductPrices,
+} from '../models';
+import { validateOrder, validateStatus } from './validators/order';
+
+const STATUS = {
+  0: 'PENDING',
+  1: 'PROCESSING',
+  2: 'COMPLETED',
+  3: 'PAID',
+};
 
 class OrderController {
   async store(req, res) {
@@ -10,9 +23,13 @@ class OrderController {
     }
 
     const { products, customerEmail } = req.body;
-    const productIDs = products.map((i) => i.id);
-    let customerId = 0;
+    const productInfo = {};
+    const productIDs = products.map((i) => {
+      productInfo[i.id] = { id: i.id, quantity: i.quantity, size: i.size };
+      return i.id;
+    });
 
+    let customerId = 0;
     if (customerEmail) {
       const customer = await Customer.findOne({
         where: { email: customerEmail },
@@ -25,49 +42,98 @@ class OrderController {
       customerId = customer.id;
     }
 
-    const allProducts = await Product.findAll({
+    const allProducts = await ProductPrices.findAll({
       where: {
-        id: {
+        product_id: {
           [Op.in]: productIDs,
         },
       },
+      include: { model: Product, as: 'product' },
     });
 
-    if (allProducts.length != productIDs.length) {
+    const allProductsMap = {};
+    allProducts.forEach(({ id, product_id, size, price, product }) => {
+      const data = productInfo[product_id];
+      if (data && data.size === size) {
+        allProductsMap[product_id] = {
+          ...data,
+          size,
+          price,
+          product,
+          price_id: id,
+        };
+      }
+    });
+
+    const arrProductsMap = Object.values(allProductsMap);
+    if (arrProductsMap.length != productIDs.length) {
       return res.status(400).json({ error: 'invalid product id' });
     }
 
-    const price = allProducts.reduce((acc, curr) => acc + curr.price, 0);
+    const price = arrProductsMap.reduce((acc, curr) => {
+      return acc + curr.price * productInfo[curr.id].quantity || 1;
+    }, 0);
+
     const order = await Order.create({
       price,
       customer_id: customerId ? customerId : null,
     });
 
     products.forEach(({ quantity, id }) => {
-      OrderProducts.create({ quantity, product_id: id, order_id: order.id });
+      OrderProducts.create({
+        quantity,
+        product_prices_id: allProductsMap[id].price_id,
+        order_id: order.id,
+      });
     });
 
-    return res.status(201).json({ order, products: allProducts });
+    return res.status(201).json({ order, products: arrProductsMap });
   }
 
-  async showId(req, res) {
+  async showAll(req, res) {
+    const returnOrders = {};
+    const orderProducts = await OrderProducts.findAll({
+      include: [
+        {
+          model: ProductPrices,
+          as: 'product_prices',
+          include: { model: Product, as: 'product' },
+        },
+        { model: Order, as: 'order' },
+      ],
+    });
+
+    orderProducts.forEach(({ order, product_prices, quantity }) => {
+      if (!returnOrders[order.id]) {
+        returnOrders[order.id] = { order, products: [] };
+      }
+
+      returnOrders[order.id].products.push({
+        ...product_prices.product.dataValues,
+        quantity,
+        prices: product_prices.dataValues,
+      });
+    });
+
+    return res.status(200).json(Object.values(returnOrders));
+  }
+
+  async updateStatus(req, res) {
+    const { status } = req.body;
+
+    const statusError = validateStatus(status);
+    if (statusError) {
+      return res.status(400).json({ errors: statusError });
+    }
+
     const order = await Order.findByPk(req.params.id);
     if (!order) {
       return res.status(400).json({ error: "Order doesn't exists" });
     }
 
-    const orderProducts = await OrderProducts.findAll({
-      where: { order_id: order.id },
-      include: { model: Product, as: 'product' },
-    });
-
-    return res.status(200).json({
-      id: order.id,
-      price: order.price,
-      status: order.status,
-      createdAt: order.createdAt,
-      products: orderProducts.map((i) => i.product),
-    });
+    order.status = STATUS[status];
+    order.update();
+    return res.status(200).json(order);
   }
 }
 

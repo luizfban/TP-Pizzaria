@@ -16,9 +16,9 @@ class OrderProducts extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Product, {
-      foreignKey: 'product_id',
-      as: 'product',
+    this.belongsTo(models.ProductPrices, {
+      foreignKey: 'product_prices_id',
+      as: 'product_prices',
     });
 
     this.belongsTo(models.Order, {

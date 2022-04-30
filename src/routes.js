@@ -14,10 +14,12 @@ routes.get('/employee/:id', Employee.showId);
 routes.post('/login', Auth.store);
 
 routes.post('/product', Product.store);
+routes.delete('/product/:id', Product.delete);
 routes.get('/product/:id', Product.showId);
 routes.get('/products', Product.showAll);
 
 routes.post('/order', Order.store);
-routes.get('/order/:id', Order.showId);
+routes.get('/orders', Order.showAll);
+routes.put('/order/:id', Order.updateStatus);
 
 export default routes;

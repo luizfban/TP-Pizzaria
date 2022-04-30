@@ -61,7 +61,7 @@
 ```
 
 ### Order
-- **GET** `/order/:id` 
+- **GET** `/orders`
 - **POST** `/order` @session
 ```js
 {
