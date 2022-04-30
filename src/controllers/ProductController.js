@@ -1,5 +1,6 @@
 import { Product, ProductPrices } from '../models';
 import { validateProduct } from './validators/product';
+import { products as seedProducts, prices as seedPrices } from '../seed';
 
 class ProductController {
   async store(req, res) {
@@ -77,6 +78,21 @@ class ProductController {
 
     product.destroy();
     return res.status(200).json();
+  }
+
+  async createSeeds(req, res) {
+    seedProducts.forEach(async ({ name, ingredients }, i) => {
+      const product = await Product.create({ name, ingredients });
+      Object.entries(seedPrices[i]).forEach(([key, value]) => {
+        ProductPrices.create({
+          product_id: product.id,
+          size: key,
+          price: value,
+        });
+      });
+    });
+
+    return res.status(201).json();
   }
 }
 

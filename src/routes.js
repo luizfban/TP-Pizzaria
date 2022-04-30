@@ -17,6 +17,7 @@ routes.post('/product', Product.store);
 routes.delete('/product/:id', Product.delete);
 routes.get('/product/:id', Product.showId);
 routes.get('/products', Product.showAll);
+routes.post('/products-seed', Product.createSeeds);
 
 routes.post('/order', Order.store);
 routes.get('/orders', Order.showAll);
