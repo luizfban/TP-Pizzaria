@@ -1,7 +1,17 @@
 import { Button, Typography } from "antd";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import Pizza from "../assets/pizza.png";
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
 
 const SectionMenu = () => (
   <Section id="products">
@@ -73,6 +83,7 @@ const Flex = styled.div`
 
   img {
     width: 40%;
+    animation: ${rotate} 10s linear infinite;
   }
 
   button {
