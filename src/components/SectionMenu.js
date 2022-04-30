@@ -8,15 +8,18 @@ const SectionMenu = () => (
     <Flex>
       <Typography.Title>Conheça nossas pizzas!</Typography.Title>
       <img src={Pizza} alt="pizza" />
-      <Button shape="round" size="large">
-        Ver mais!
-      </Button>
+      <a href="#products">
+        <Button shape="round" size="large">
+          Ver mais!
+        </Button>
+      </a>
     </Flex>
   </Section>
 );
 
 const Section = styled.section`
   position: relative;
+  scroll-margin-block-start: -700px;
 
   &:before {
     content: "";
