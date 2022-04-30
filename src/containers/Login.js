@@ -11,8 +11,7 @@ const Login = () => {
   const onSubmit = async () => {
     try {
       const { data } = await api.post("/login", form.getFieldsValue());
-      sessionStorage.setItem("token", data.token);
-
+      sessionStorage.setItem("user", JSON.stringify(data));
       notification.success({
         message: "Login feito com sucesso!",
         description: "Use nossa plataforma!",

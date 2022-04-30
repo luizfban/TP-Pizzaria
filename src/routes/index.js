@@ -7,7 +7,16 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import { Register, Login, Home, AddProducts, AddOrders } from "../pages";
+import {
+  Register,
+  Login,
+  Home,
+  AddProducts,
+  AddOrders,
+  Menu,
+  Products,
+  Orders,
+} from "../pages";
 import PrivateRoute from "./PrivateRoute";
 
 export default function CustomRoutes() {
@@ -16,7 +25,8 @@ export default function CustomRoutes() {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="*" element={<Navigate to="/menu" replace />} />
         <Route
           path="/"
           element={
@@ -27,7 +37,9 @@ export default function CustomRoutes() {
         >
           <Route index element={<Home />} />
           <Route path="products/new" element={<AddProducts />} />
+          <Route path="products" element={<Products />} />
           <Route path="orders/new" element={<AddOrders />} />
+          <Route path="orders" element={<Orders />} />
         </Route>
       </Routes>
     </Router>

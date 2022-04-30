@@ -11,6 +11,8 @@ const options = [
   { value: "Frango" },
   { value: "Catupiry" },
   { value: "Carne seca" },
+  { value: "Chocolate" },
+  { value: "Morango" },
 ];
 
 const AddProducts = ({ form, onSubmit }) => (

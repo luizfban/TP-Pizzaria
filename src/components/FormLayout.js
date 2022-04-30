@@ -1,13 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const FormLayout = ({ children }) => (
-  <Wrapper>
-    <Logo>
-      Pizza<b>.</b>
-    </Logo>
-    {children}
-  </Wrapper>
-);
+const FormLayout = ({ children }) => {
+  const navigate = useNavigate();
+
+  return (
+    <Wrapper>
+      <Logo onClick={() => navigate("/menu")}>
+        Pizza<b>.</b>
+      </Logo>
+      {children}
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   display: flex;
@@ -42,6 +47,7 @@ const Logo = styled.div`
   font-size: 32px;
   font-weight: 700;
   letter-spacing: 2px;
+  cursor: pointer;
 
   b {
     color: #a3d1ae;
