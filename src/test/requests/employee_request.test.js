@@ -39,7 +39,7 @@ describe('GET /employee/:id', function () {
         });
         it('try to get employee by id', async done => {
             app.get('/employee/1', function(req, res) {
-              res.status(200).json({ name: 'john', email: 'john_doe@pucminas.br', admin: true);
+              res.status(200).json({ name: 'john', email: 'john_doe@pucminas.br', admin: true});
             });
         })
     });
